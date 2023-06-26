@@ -3,26 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:41:51 by pcazac            #+#    #+#             */
-/*   Updated: 2023/06/26 17:24:59 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/06/26 21:34:01 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/pipex.h"
 // The function should take the arguments and separate the command from the file
-char	**parse_arg(char *argv)
-{
-	char	**arg;
-
-	arg = ft_split(argv, ' ');
-	if (!arg)
-		return (NULL);
-	if (!*arg)
-		return (free_paths(arg), NULL);
-	return (arg);
-}
 
 char	**parse_command(char *argv, char **env)
 {
