@@ -3,14 +3,54 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:17:10 by pcazac            #+#    #+#             */
-/*   Updated: 2023/06/23 16:57:27 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/06/26 09:22:25 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/pipex.h"
+
+int	child(char **argv, char **env, int *fd)
+{
+	char	*file_path;
+	char	**command;
+	int		infile;
+
+	ft_printf("%s, %s\n", argv[1], argv[2]);
+	parse_in(argv[1], env, &file_path);
+	parse_command(argv[2], env, &command);
+	infile = open(file_path, O_RDONLY);
+	// check the open function
+	dup2(infile, STDIN_FILENO);
+	dup2(fd[1], STDOUT_FILENO);
+	close(fd[1]);
+	close(fd[0]);
+	if (execve(command[0], command + 1, env) == -1)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
+
+int	parent(char **argv, char **env, int *fd)
+{
+	char	*file_path;
+	char	**command;
+	int		outfile;
+
+	ft_printf("%s, %s\n", argv[3], argv[4]);
+	parse_out(argv[4], env, &file_path);
+	parse_command(argv[3], env, &command);
+	outfile = open(file_path, O_RDWR, O_CREAT);
+	// Check the open command
+	dup2(outfile, STDOUT_FILENO);
+	dup2(fd[0], STDIN_FILENO);
+	close(fd[0]);
+	close(fd[1]);
+	if (execve(command[0], command + 1, env) == -1)
+		return (EXIT_FAILURE);
+	return (EXIT_SUCCESS);
+}
 
 int main(int argc, char *argv[], char *env[])
 {
@@ -29,48 +69,8 @@ int main(int argc, char *argv[], char *env[])
 	if (pid == -1)
 		return (EXIT_FAILURE);
 	if(pid == 0)
-		child(argc, env, fd);
+		child(argv, env, fd);
 	else if (pid > 0)
-	{
-		ft_printf("%s, %s\n", argv[3], argv[4]);
-		dup2(fd[0], STDIN_FILENO);
-		close(fd[0]);
-		close(fd[1]);
-		// if (execve(gp(argv[3]), pa(argv[4]), env) == -1)
-		if (execve(argv[3], &argv[4], env) == -1)
-			return (EXIT_FAILURE);
-	}
+		parent(argv, env, fd);
 	return (0);
-}
-
-int	child(char **argv, char **env, int *fd)
-{
-	char	*path;
-	int		infile;
-
-	ft_printf("%s, %s\n", argv[1], argv[2]);
-	path = get_path(argv[1]);
-	infile = open(path, O_RDONLY);
-	dup2(fd[1], STDOUT_FILENO);
-	close(fd[1]);
-	close(fd[0]);
-	// if (execve(gp(argv[1]), pa(argv[2]), env) == -1)
-	if (execve(argv[1], &argv[2], env) == -1)
-		return (EXIT_FAILURE);
-}
-
-int	parent(char **argv, char **env)
-{
-	char	*path;
-	int		infile;
-
-	ft_printf("%s, %s\n", argv[1], argv[2]);
-	path = get_path(argv[4]);
-	infile = open(path, O_RDONLY);
-	dup2(fd[0], STDOUT_FILENO);
-	close(fd[0]);
-	close(fd[1]);
-	// if (execve(gp(argv[1]), pa(argv[2]), env) == -1)
-	if (execve(argv[1], &argv[2], env) == -1)
-		return (EXIT_FAILURE);
 }

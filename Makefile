@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+         #
+#    By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/21 10:54:02 by pcazac            #+#    #+#              #
-#    Updated: 2023/06/21 11:34:45 by pcazac           ###   ########.fr        #
+#    Updated: 2023/06/25 12:40:56 by pcazac           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ LIB_PATH = -Llibft
 LIBRARY = -lft
 OBJ_PATH = obj
 
-SRC = pipex.c
+SRC = pipex.c parse_args.c
 
 OBJ = $(SRC:%.c=$(OBJ_PATH)/%.o)
 
