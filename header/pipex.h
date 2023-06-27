@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:17:39 by pcazac            #+#    #+#             */
-/*   Updated: 2023/06/26 21:32:58 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/06/27 15:46:42 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <string.h>
 # include <sys/wait.h>
 # include "../libft/header/libft.h"
+# include <errno.h>
 
 char	**parse_command(char *argv, char **env);
 int		init_check(int argc, char *argv[], char **env);

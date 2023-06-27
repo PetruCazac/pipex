@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   init_check.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:40:07 by pcazac            #+#    #+#             */
-/*   Updated: 2023/06/26 21:57:08 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/06/27 15:46:58 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,9 +149,9 @@ int	init_check(int argc, char *argv[], char **env)
 	// if (check_infile(argv[1], env) == EXIT_FAILURE)
 		// return (ft_printf("SOURCE FILE ERROR:\n"), EXIT_FAILURE);
 	if (check_command(argv[2], env) == EXIT_FAILURE)
-		return (ft_printf("COMMAND 1 ERROR\n"), EXIT_FAILURE);
+		return (ft_printf("COMMAND 1 ERROR\n"), errno);
 	if (check_command(argv[3], env) == EXIT_FAILURE)
-		return (ft_printf("COMMAND 2 ERROR\n"), EXIT_FAILURE);
+		return (ft_printf("COMMAND 2 ERROR\n"), errno);
 	// if (check_outfile(argv[4], env) == EXIT_FAILURE)
 	// 	return (ft_printf("EXIT FILE ERROR:\n"), EXIT_FAILURE);
 	return (EXIT_SUCCESS);

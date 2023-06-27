@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:17:10 by pcazac            #+#    #+#             */
-/*   Updated: 2023/06/26 22:29:43 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/06/27 16:55:32 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,10 @@ int	child(char **argv, char **env, int *fd)
 	dup2(infile, STDIN_FILENO);
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[0]);
+	close(fd[1]);
+	close(infile);
 	if (execve(command[0], command, env) == -1)
-		return (EXIT_FAILURE);
+		exit(126);
 	return (EXIT_SUCCESS);
 }
 
@@ -41,8 +43,9 @@ int	parent(char **argv, char **env, int *fd)
 
 	command = NULL;
 	// ft_printf("Parent: %s, %s\n", argv[3], argv[4]);
+	waitpid(-1, NULL, 0);
 	command = parse_command(argv[3], env);
-	outfile = open(argv[4], O_RDWR, O_TRUNC, O_CREAT, 0644);
+	outfile = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0644);
 		if (outfile < 0)
 	{
 		perror("OPEN ERROR");
@@ -51,8 +54,10 @@ int	parent(char **argv, char **env, int *fd)
 	dup2(outfile, STDOUT_FILENO);
 	dup2(fd[0], STDIN_FILENO);
 	close(fd[1]);
+	close(fd[0]);
+	close(outfile);
 	if (execve(command[0], command, env) == -1)
-		return (EXIT_FAILURE);
+		exit(126);
 	return (EXIT_SUCCESS);
 }
 
