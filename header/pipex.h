@@ -6,12 +6,12 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:17:39 by pcazac            #+#    #+#             */
-/*   Updated: 2023/06/27 15:46:42 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/06/28 16:21:36 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PIPEX
-# define PIPEX
+#ifndef PIPEX_H
+# define PIPEX_H
 
 # include <unistd.h>
 # include <sys/types.h>
@@ -25,9 +25,9 @@
 # include <errno.h>
 
 char	**parse_command(char *argv, char **env);
-int		init_check(int argc, char *argv[], char **env);
+int		init_check(int argc, char *argv[]);
 void	free_paths(char **path);
 size_t	ft_strlength(char **c);
-char	**parse_arg(char *argv);
+char	**parse_arg(char *argv, char c);
 
 #endif
