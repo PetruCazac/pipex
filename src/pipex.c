@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:17:10 by pcazac            #+#    #+#             */
-/*   Updated: 2023/06/28 17:59:43 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/06/28 18:47:40 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,6 @@ int	child(char **argv, char **env, int *fd)
 
 	command = NULL;
 	command = parse_command(argv[2], env);
-	if (command == NULL)
-	{
-		errno = 0;
-		ft_putstr_fd("command not found:\n", 2);
-		// ft_putstr_fd(argv[2], 2);
-		exit(errno);
-	}
 	infile = open(argv[1], O_RDONLY);
 	if (infile < 0)
 	{
@@ -40,9 +33,10 @@ int	child(char **argv, char **env, int *fd)
 	close(infile);
 	if (execve(command[0], command, env) == -1)
 	{
-		errno = 0;
+		errno = 127;
 		ft_putstr_fd("command not found:\n", 2);
-		// ft_putstr_fd(command[0], 2);
+		ft_putstr_fd(command[0], 2);
+		ft_putstr_fd("\n", 2);
 		exit(errno);
 	}
 	return (EXIT_SUCCESS);
@@ -56,13 +50,6 @@ int	parent(char **argv, char **env, int *fd)
 	command = NULL;
 	waitpid(-1, NULL, WNOHANG);
 	command = parse_command(argv[3], env);
-	if (command == NULL)
-	{
-		errno = 126;
-		ft_putstr_fd("command not found:\n", 2);
-		// ft_putstr_fd(argv[3], 2);
-		exit(errno);
-	}
 	outfile = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0644);
 	if (outfile < 0)
 	{
@@ -79,7 +66,8 @@ int	parent(char **argv, char **env, int *fd)
 	{
 		errno = 127;
 		ft_putstr_fd("command not found:\n", 2);
-		// ft_putstr_fd(command[0], 2);
+		ft_putstr_fd(command[0], 2);
+		ft_putstr_fd("\n", 2);
 		exit(errno);
 	}
 	return (EXIT_SUCCESS);

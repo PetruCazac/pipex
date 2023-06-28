@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parse_args.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:41:51 by pcazac            #+#    #+#             */
-/*   Updated: 2023/06/28 17:39:29 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/06/28 18:46:47 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,5 +90,5 @@ char	**parse_command(char *argv, char **env)
 			return (free_paths(paths), arg);
 		}
 	}
-	return (free_paths(arg), free_paths(paths), NULL);
+	return (free_paths(paths), arg);
 }
