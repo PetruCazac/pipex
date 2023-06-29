@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/23 11:40:07 by pcazac            #+#    #+#             */
-/*   Updated: 2023/06/28 16:20:01 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/06/29 10:11:09 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	init_check(int argc, char *argv[])
 	int	i;
 
 	i = -1;
-	if (argc != 5)
+	if (argc < 5)
 	{
 		errno = 2;
 		return (write(2, "ARGUMENT ERROR\n", 15), EXIT_FAILURE);
