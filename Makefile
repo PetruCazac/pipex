@@ -6,7 +6,7 @@
 #    By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/21 10:54:02 by pcazac            #+#    #+#              #
-#    Updated: 2023/06/28 16:57:21 by pcazac           ###   ########.fr        #
+#    Updated: 2023/06/29 08:38:49 by pcazac           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -23,8 +23,7 @@ SRC = pipex.c init_check.c parse_args.c
 OBJ = $(SRC:%.c=$(OBJ_PATH)/%.o)
 
 CC= cc
-CFLAGS= -g 
-# -Wall -Wextra -Werror
+CFLAGS= -g -Wall -Wextra -Werror
 
 all: $(NAME)
 
