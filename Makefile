@@ -6,7 +6,7 @@
 #    By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2023/06/21 10:54:02 by pcazac            #+#    #+#              #
-#    Updated: 2023/06/29 10:16:30 by pcazac           ###   ########.fr        #
+#    Updated: 2023/06/30 15:23:04 by pcazac           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ NAME = pipex
 BONUS = bonus
 LIBFT = libft/libft.a
 
-VPATH = src/ ; obj/
+VPATH = src/ ; obj/ ; src_bonus/ ;
 LIB_PATH = -Llibft
 LIBRARY = -lft
 OBJ_PATH = obj
@@ -22,7 +22,7 @@ OBJ_PATH = obj
 SRC = pipex.c init_check.c parse_args.c
 OBJ = $(SRC:%.c=$(OBJ_PATH)/%.o)
 
-BSRC = pipex_bonus.c init_check.c parse_args.c
+BSRC = pipex_bonus.c pipex_utils_bonus.c init_check.c parse_args.c
 BOBJ = $(BSRC:%.c=$(OBJ_PATH)/%.o)
 
 CC= cc

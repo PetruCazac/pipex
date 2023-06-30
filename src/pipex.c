@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:17:10 by pcazac            #+#    #+#             */
-/*   Updated: 2023/06/29 18:01:38 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/06/30 15:36:05 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ int	parent(char **argv, char **env, int *fd)
 	int		outfile;
 
 	command = NULL;
-	waitpid(-1, NULL, 0);
+	// waitpid(-1, NULL, 0);
 	command = parse_command(argv[3], env);
 	outfile = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0644);
 	if (outfile < 0)
