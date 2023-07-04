@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:17:10 by pcazac            #+#    #+#             */
-/*   Updated: 2023/06/30 15:22:10 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/07/04 21:21:38 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,6 @@ int	parent(char **argv, char **env, int *fd, int i)
 	int		outfile;
 
 	command = NULL;
-	waitpid(-1, NULL, 0);
 	command = parse_command(argv[i], env);
 	outfile = open(argv[i + 1], O_RDWR | O_TRUNC | O_CREAT, 0644);
 	if (outfile < 0)
@@ -55,7 +54,7 @@ int	main(int argc, char *argv[], char *env[])
 	int		i;
 
 	i = 3;
-	if (init_check(argc, argv) == EXIT_FAILURE)
+	if (init_bonus_check(argc, argv) == EXIT_FAILURE)
 		return (errno);
 	pid = pork(&fd);
 	if (pid == 0)
@@ -73,6 +72,12 @@ int	main(int argc, char *argv[], char *env[])
 		i++;
 	}
 	if (pid > 0)
+	{
 		parent(argv, env, fd, i);
+		waitpid(-1, NULL, 0);
+	}
 	return (0);
 }
+// Create a heredoc function that will be called in the main function and will copy the functioning
+// of here-doc
+

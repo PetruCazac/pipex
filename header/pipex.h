@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:17:39 by pcazac            #+#    #+#             */
-/*   Updated: 2023/06/30 15:22:03 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/07/04 16:26:22 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,10 @@ int		init_check(int argc, char *argv[]);
 void	free_paths(char **path);
 size_t	ft_strlength(char **c);
 char	**parse_arg(char *argv, char c);
-int	first_child(char **argv, char **env, int *fd);
+int		first_child(char **argv, char **env, int *fd);
 void	error_mngr(char **command, int err);
 void	close_pipe(int *fd);
-int	pork(int (*fd)[2]);
+int		pork(int (*fd)[2]);
+int	init_bonus_check(int argc, char *argv[]);
 
 #endif

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:17:10 by pcazac            #+#    #+#             */
-/*   Updated: 2023/06/30 15:36:05 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/07/04 16:22:30 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,6 @@ int	parent(char **argv, char **env, int *fd)
 	int		outfile;
 
 	command = NULL;
-	// waitpid(-1, NULL, 0);
 	command = parse_command(argv[3], env);
 	outfile = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0644);
 	if (outfile < 0)
@@ -84,6 +83,9 @@ int	main(int argc, char *argv[], char *env[])
 	if (pid == 0)
 		child(argv, env, fd);
 	else if (pid > 0)
+	{	
 		parent(argv, env, fd);
+		waitpid(-1, NULL, 0);
+	}
 	return (0);
 }
