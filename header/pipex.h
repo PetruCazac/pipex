@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:17:39 by pcazac            #+#    #+#             */
-/*   Updated: 2023/07/04 16:26:22 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/07/05 18:01:19 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,14 @@ char	**parse_arg(char *argv, char c);
 int		first_child(char **argv, char **env, int *fd);
 void	error_mngr(char **command, int err);
 void	close_pipe(int *fd);
-int		pork(int (*fd)[2]);
-int	init_bonus_check(int argc, char *argv[]);
+// int		pork(int (*fd)[]);
+int		pork(void);
+int		init_bonus_check(int argc, char *argv[]);
+int		parent(int *fd);
+// int		second_parent(int *fd);
+int		second_parent(void);
+int		child(char **argv, char **env, int *fd);
+int		second_child(char **argv, char **env, int *fd);
+int		waitall(int *fd);
 
 #endif

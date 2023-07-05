@@ -1,18 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   pipex_utils_bonus.c                                :+:      :+:    :+:   */
+/*   pipex_child.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/06/30 15:20:17 by pcazac            #+#    #+#             */
-/*   Updated: 2023/07/05 13:17:08 by pcazac           ###   ########.fr       */
+/*   Created: 2023/06/21 11:17:10 by pcazac            #+#    #+#             */
+/*   Updated: 2023/07/05 15:25:38 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../header/pipex.h"
 
-int	first_child(char **argv, char **env, int *fd)
+int	child(char **argv, char **env, int *fd)
 {
 	char	**command;
 	int		infile;
@@ -28,36 +28,35 @@ int	first_child(char **argv, char **env, int *fd)
 	}
 	dup2(infile, STDIN_FILENO);
 	dup2(fd[1], STDOUT_FILENO);
-	close_pipe(fd);
+	close(fd[0]);
+	close(infile);
 	if (execve(command[0], command, env) == -1)
 		error_mngr(command, errno);
 	return (EXIT_SUCCESS);
 }
 
-void	error_mngr(char **command, int err)
+int	second_child(char **argv, char **env, int *fd)
 {
-	err = 127;
-	ft_putstr_fd("command not found:", 2);
-	ft_putstr_fd(command[0], 2);
-	ft_putstr_fd("\n", 2);
-	exit(err);
-}
+	char	**command;
+	int		outfile;
 
-void	close_pipe(int *fd)
-{
-	close(fd[0]);
+	command = NULL;
+	command = parse_command(argv[3], env);
+	outfile = open(argv[4], O_RDWR | O_TRUNC | O_CREAT, 0644);
+	if (outfile < 0)
+	{
+		errno = 2;
+		perror("OPEN ERROR");
+		exit(errno);
+	}
+	dup2(outfile, STDOUT_FILENO);
+	dup2(fd[0], STDIN_FILENO);
 	close(fd[1]);
+	close(outfile);
+	printf("got to second child");
+	// while(1)
+	// {outfile++;}
+	if (execve(command[0], command, env) == -1)
+		error_mngr(command, errno);
+	return (EXIT_SUCCESS);
 }
-
-// int	pork(int (*fd)[2])
-// {
-// 	int	pid;
-
-// 	pid = 0;
-// 	if (pipe (*fd) == -1)
-// 		return (-1);
-// 	pid = fork();
-// 	if (pid == -1)
-// 		exit(errno);
-// 	return (pid);
-// }
