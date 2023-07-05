@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex_bonus.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:17:10 by pcazac            #+#    #+#             */
-/*   Updated: 2023/07/04 21:21:38 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/07/05 10:18:00 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,7 @@ int	main(int argc, char *argv[], char *env[])
 	if (pid > 0)
 	{
 		parent(argv, env, fd, i);
-		waitpid(-1, NULL, 0);
+		waitpid(0, NULL, 0);
 	}
 	return (0);
 }

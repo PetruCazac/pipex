@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pcazac <pcazac@student.42heilbronn.de>     +#+  +:+       +#+        */
+/*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:17:10 by pcazac            #+#    #+#             */
-/*   Updated: 2023/07/04 16:22:30 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/07/05 11:09:00 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@ int	child(char **argv, char **env, int *fd)
 	dup2(infile, STDIN_FILENO);
 	dup2(fd[1], STDOUT_FILENO);
 	close(fd[0]);
+	close(infile);
 	if (execve(command[0], command, env) == -1)
 		error_mngr(command, errno);
 	return (EXIT_SUCCESS);
@@ -60,6 +61,9 @@ int	parent(char **argv, char **env, int *fd)
 	dup2(outfile, STDOUT_FILENO);
 	dup2(fd[0], STDIN_FILENO);
 	close(fd[1]);
+	close(outfile);
+	while(1)
+	{outfile++;}
 	if (execve(command[0], command, env) == -1)
 		error_mngr(command, errno);
 	return (EXIT_SUCCESS);
