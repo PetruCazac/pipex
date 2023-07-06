@@ -6,7 +6,7 @@
 /*   By: pcazac <pcazac@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/21 11:17:10 by pcazac            #+#    #+#             */
-/*   Updated: 2023/07/06 12:05:41 by pcazac           ###   ########.fr       */
+/*   Updated: 2023/07/06 15:25:22 by pcazac           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,6 @@ int	second_child(char **argv, char **env, int *fd)
 	dup2(fd[0], STDIN_FILENO);
 	close(fd[1]);
 	close(outfile);
-	printf("got to second child");
 	if (execve(command[0], command, env) == -1)
 		error_mngr(command, errno);
 	return (EXIT_SUCCESS);
